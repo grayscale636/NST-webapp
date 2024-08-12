@@ -1,66 +1,100 @@
-# Neural Style Transfer, web application
+# Project Documentation
 
 ## Overview
-This project consists of a backend and a frontend application for image uploading and processing.
+
+This project consists of two main parts: the frontend and the backend. The frontend is a React application that allows users to upload images for neural style transfer. The backend is a FastAPI application that handles the image processing using a neural style transfer model.
 
 ## Prerequisites
 
-### Backend
-- Node.js (version 14 or higher)
-- Express.js
-- Multer (for handling file uploads)
-- CORS (for cross-origin requests)
+- Node.js (for the frontend)
+- Python 3.7+ (for the backend)
+- pip (Python package installer)
 
-### Frontend
-- Node.js (version 14 or higher)
-- React (version 16.8 or higher)
+## Frontend
 
-## Installation
+### Installation
 
-### Backend
+1. Navigate to the `frontend` directory:
+    ```sh
+    cd frontend
+    ```
 
-1. Navigate to the backend directory:
-   ```bash
-   cd backend
-   ```
+2. Install the dependencies:
+    ```sh
+    npm install
+    ```
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+### Running the Frontend
 
-3. Start the server:
-   ```bash
-   npm start
-   ```
+1. Start the development server:
+    ```sh
+    npm start
+    ```
 
-4. The backend will run on `http://localhost:8000`.
+2. Open your browser and navigate to `http://localhost:3000`.
 
-### Frontend
+### File Structure
 
-1. Navigate to the frontend directory:
-   ```bash
-   cd frontend
-   ```
+- `src/components/ImageUploader.js`: Component for uploading images and displaying the generated image.
+- `src/index.js`: Entry point of the React application.
+- `src/App.js`: Main application component.
+- `src/index.css`: Global CSS styles.
+- `src/App.css`: CSS styles for the App component.
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+## Backend
 
-3. Start the React application:
-   ```bash
-   npm start
-   ```
+### Installation
 
-4. The frontend will run on `http://localhost:3000`.
+1. Navigate to the `backend` directory:
+    ```sh
+    cd backend
+    ```
+
+2. Create a virtual environment:
+    ```sh
+    python -m venv venv
+    ```
+
+3. Activate the virtual environment:
+    - On Windows:
+        ```sh
+        venv\Scripts\activate
+        ```
+    - On macOS/Linux:
+        ```sh
+        source venv/bin/activate
+        ```
+
+4. Install the dependencies:
+    ```sh
+    pip install -r requirements.txt
+    ```
+
+### Running the Backend
+
+1. Start the FastAPI server:
+    ```sh
+    uvicorn main:app --reload
+    ```
+
+2. The backend server will be running at `http://localhost:8000`.
+
+### File Structure
+
+- `main.py`: Main entry point of the FastAPI application.
+- `src/models.py`: Contains the neural style transfer model.
+- `src/utils.py`: Utility functions for image handling.
+- `src/criterion.py`: Criterion for calculating the loss during training.
+- `requirements.txt`: List of Python dependencies.
 
 ## Usage
 
-1. Open your browser and go to `http://localhost:3000`.
-2. Use the file input fields to upload images.
-3. Click the "Upload" button to send the images to the backend for processing.
-4. The generated image will be displayed below the upload buttons.
+1. Open the frontend application in your browser.
+2. Upload a content image and a style image.
+3. Click the "Upload" button to start the neural style transfer process.
+4. The generated image will be displayed once the process is complete.
 
-## License
-This project is licensed under the MIT License.
+## Notes
+
+- Ensure that the backend server is running before using the frontend application.
+- The backend server should be accessible at `http://localhost:8000` for the frontend to communicate with it.
