@@ -1,4 +1,4 @@
-# Project Title
+# Neural Style Transfer, web application
 
 ## Overview
 This project consists of a backend and a frontend application for image uploading and processing.
