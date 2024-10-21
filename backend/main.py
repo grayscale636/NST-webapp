@@ -15,7 +15,6 @@ from torch import optim
 
 app = FastAPI()
 
-# Konfigurasi CORS
 origins = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
@@ -64,15 +63,13 @@ async def upload(content: UploadFile = File(...), style: UploadFile = File(...))
 
 @app.post("/train/")
 async def train(request: TrainRequest):
-    # Baca gambar dari path yang diberikan
     content_image = image_handler.load_image(request.content_image_path, image_handler.transform).to(device)
     style_image = image_handler.load_image(request.style_image_path, image_handler.transform).to(device)
 
     output = content_image.clone()
     output.requires_grad = True
     optimizer = optim.AdamW([output], lr=0.05)
-
-    # Ambil fitur dari model
+    
     content_features = model(content_image, layers=["4", "8"])
     style_features = model(style_image, layers=["4", "8"])
 

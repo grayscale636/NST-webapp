@@ -4,11 +4,16 @@ function ImageUploader() {
     const [content, setContent] = useState(null);
     const [style, setStyle] = useState(null);
     const [generatedImage, setGeneratedImage] = useState(null);
+    const [loading, setLoading] = useState(false); // State untuk loading
 
     const handleUpload = async () => {
+        if (loading) return; // Jika sedang loading, jangan lakukan apa-apa
+
         const formData = new FormData();
         formData.append('content', content);
         formData.append('style', style);
+
+        setLoading(true); // Set loading ke true saat mulai upload
 
         try {
             const response = await fetch('http://localhost:8000/upload/', {
@@ -25,6 +30,8 @@ function ImageUploader() {
             handleGetImage(data.generated_image_name);
         } catch (error) {
             console.error('Error:', error);
+        } finally {
+            setLoading(false); // Set loading ke false setelah selesai
         }
     };
 
@@ -46,7 +53,8 @@ function ImageUploader() {
         <div>
             <input type="file" onChange={(e) => setContent(e.target.files[0])} />
             <input type="file" onChange={(e) => setStyle(e.target.files[0])} />
-            <button onClick={handleUpload}>Upload</button>
+            <button onClick={handleUpload} disabled={loading}>Upload</button> {/* Nonaktifkan tombol saat loading */}
+            {loading && <p>Loading...</p>} {/* Tampilkan loading indicator */}
             {generatedImage && (
                 <div>
                     <h3>Gambar yang Dihasilkan:</h3>
